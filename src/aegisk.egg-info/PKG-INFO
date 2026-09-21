@@ -1,0 +1,45 @@
+Metadata-Version: 2.4
+Name: aegisk
+Version: 0.1.0
+Summary: Kernel-Native Zero-Trust Runtime Protection Engine
+Author-email: "ZeroHack.org" <solutions@zerohack.org>
+License: MIT OR ZeroHack-Commercial
+Project-URL: Homepage, https://zerohack.org
+Project-URL: Documentation, https://zerohack.org/docs/aegiskernel
+Project-URL: Repository, https://github.com/ZeroHackOrg/aegiskernel
+Keywords: ebpf,security,kernel,runtime,linux
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Security
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Provides-Extra: dev
+Requires-Dist: pytest>=7; extra == "dev"
+Requires-Dist: build; extra == "dev"
+Requires-Dist: twine; extra == "dev"
+
+# 🛡️ Project AegisKernel (`aegisk`)
+
+[![CI](https://img.shields.io/badge/CI-passing-brightgreen)](#)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
+
+**Kernel-Native Zero-Trust Runtime Protection Engine**
+Engineered by **[ZeroHack.org](https://zerohack.org)**.
+
+## Install
+
+```bash
+pip install -e .
+```
+
+## Quickstart
+
+```bash
+aegisk test
+aegisk web --port 8080
+```
+
+## License
+MIT / ZeroHack Commercial. solutions@zerohack.org.

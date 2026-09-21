@@ -1,0 +1,14 @@
+README.md
+pyproject.toml
+src/aegisk.egg-info/PKG-INFO
+src/aegisk.egg-info/SOURCES.txt
+src/aegisk.egg-info/dependency_links.txt
+src/aegisk.egg-info/entry_points.txt
+src/aegisk.egg-info/requires.txt
+src/aegisk.egg-info/top_level.txt
+src/aegiskernel/__init__.py
+src/aegiskernel/__main__.py
+src/aegiskernel/cli/__init__.py
+src/aegiskernel/cli/core.py
+src/aegiskernel/cli/webserver.py
+tests/test_aegiskernel.py

@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aegisk"
+version = "0.1.0"
+description = "Kernel-Native Zero-Trust Runtime Protection Engine"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT OR ZeroHack-Commercial" }
+authors = [{ name = "ZeroHack.org", email = "solutions@zerohack.org" }]
+keywords = ["ebpf", "security", "kernel", "runtime", "linux"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Security",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "build", "twine"]
+
+[project.urls]
+Homepage = "https://zerohack.org"
+Documentation = "https://zerohack.org/docs/aegiskernel"
+Repository = "https://github.com/ZeroHackOrg/aegiskernel"
+
+[project.scripts]
+aegisk = "aegiskernel.cli.core:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["aegiskernel*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
