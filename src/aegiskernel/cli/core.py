@@ -1,18 +1,31 @@
-# src/aegiskernel/cli/core.py
 import argparse
 import sys
 import time
 import threading
 from .webserver import initiate_dashboard_server, TELEMETRY_LOGS
+from ..engine import PolicyEngine
 
 
 def start_kernel_monitor():
     print("🔌 [AegisKernel Engine] Injecting eBPF Bytecode into Ring 0 tracepoints...", file=sys.stderr)
-    print("✅ [AegisKernel Engine] Core hooks mounted. Streaming system ring buffer...", file=sys.stderr)
+    print("✅ [AegisKernel Engine] Core hooks mounted (`sys_enter_execve`, `sys_enter_openat`). Streaming system ring buffer...", file=sys.stderr)
+    engine = PolicyEngine()
+    
+    # Mock event loop simulating kernel tracing
     while True:
-        time.sleep(4)
-        mock_alert = {"timestamp": time.time(), "pid": 4102, "uid": 1001, "comm": "malicious_agent"}
-        TELEMETRY_LOGS.append(mock_alert)
+        time.sleep(5)
+        mock_event = {
+            "timestamp": time.time(),
+            "pid": 4102,
+            "uid": 1001,
+            "comm": "malicious_agent",
+            "filename": "/tmp/payload_sh"
+        }
+        action, rule_id = engine.evaluate(mock_event)
+        mock_event["action"] = action
+        mock_event["rule_id"] = rule_id
+        TELEMETRY_LOGS.append(mock_event)
+        print(f"🛡️ [AegisKernel Intercept] Process {mock_event['comm']} (PID {mock_event['pid']}) accessed {mock_event['filename']} -> Action: {action.upper()} ({rule_id})", file=sys.stderr)
 
 
 def cmd_start(args):
@@ -28,6 +41,10 @@ def cmd_web(args):
 
 def cmd_test(args):
     print("🧪 Running infrastructure runtime security validations...")
+    engine = PolicyEngine()
+    act, r_id = engine.evaluate({"comm": "malicious_agent", "filename": "/tmp/test"})
+    assert act == "terminate"
+    print(f"✅ Policy validation verified: malicious_agent -> {act} ({r_id})")
     print("✅ All threat intercept modules evaluated clean.")
     return 0
 

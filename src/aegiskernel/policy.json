@@ -1,0 +1,24 @@
+{
+  "version": "1.0",
+  "default_action": "allow",
+  "rules": [
+    {
+      "id": "AEGIS-001",
+      "description": "Block execution of binaries spawned from /tmp or /dev/shm",
+      "action": "terminate",
+      "path_pattern": "^/(tmp|dev/shm)/"
+    },
+    {
+      "id": "AEGIS-002",
+      "description": "Alert on unauthorized access to shadow files or SSH keys",
+      "action": "alert",
+      "path_pattern": "^/etc/(shadow|sudoers)"
+    },
+    {
+      "id": "AEGIS-003",
+      "description": "Block unauthorized network socket binding in restricted containers",
+      "action": "block",
+      "syscall": "sys_enter_socket"
+    }
+  ]
+}
